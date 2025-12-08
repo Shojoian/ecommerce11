@@ -9,19 +9,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\ProfileController; // ⬅ IMPORTANT
 use App\Http\Controllers\Auth\PasswordResetLinkController;
-use Illuminate\Support\Facades\Mail;
 
-Route::get('/test-mail', function () {
-    try {
-        Mail::raw('Test email from NOTAMAZON', function ($message) {
-            $message->to('bjaynomoney@gmail.com')
-                    ->subject('Mail Test');
-        });
-        return "Mail sent!";
-    } catch (\Exception $e) {
-        return "Mail FAILED: " . $e->getMessage();
-    }
-});
 
 
 /*
@@ -29,6 +17,10 @@ Route::get('/test-mail', function () {
 | Storefront Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/fix-migrate', function () {
+    \Artisan::call('migrate', ['--force' => true]);
+    return "Migrated.";
+});
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
