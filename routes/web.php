@@ -17,14 +17,6 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 | Storefront Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/test', function () {
-    try {
-        \DB::connection()->getPdo();
-        return "DATABASE OK: " . \DB::connection()->getDatabaseName();
-    } catch (\Exception $e) {
-        return "DATABASE ERROR: " . $e->getMessage();
-    }
-});
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
