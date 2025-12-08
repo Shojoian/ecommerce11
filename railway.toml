@@ -1,0 +1,8 @@
+[build]
+commands = [
+    "mkdir -p storage/framework/sessions",
+    "mkdir -p storage/framework/views",
+    "mkdir -p storage/framework/cache",
+    "chmod -R 775 storage",
+    "chmod -R 775 bootstrap/cache"
+]
