@@ -10,11 +10,6 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withStorage(
-        storage: storage_path('app'),
-        public: storage_path('app/public'),
-        url: env('APP_URL').'/storage',
-    )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
