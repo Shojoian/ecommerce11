@@ -17,6 +17,15 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 | Storefront Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/fix-admin', function () {
+    $user = \App\Models\User::where('email', 'YOUR_ADMIN_EMAIL_HERE')->first();
+
+    if (!$user) return 'Admin user not found.';
+    
+    $user->assignRole('admin');
+
+    return 'Admin role assigned!';
+});
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
