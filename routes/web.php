@@ -17,6 +17,10 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 | Storefront Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/migrate', function () {
+    \Artisan::call('migrate --force');
+    return 'MIGRATED!';
+});
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
