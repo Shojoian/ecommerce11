@@ -17,14 +17,26 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 | Storefront Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/fix-admin', function () {
-    $user = \App\Models\User::where('email', 'YOUR_ADMIN_EMAIL_HERE')->first();
+Route::get('/make-admin', function () {
 
-    if (!$user) return 'Admin user not found.';
-    
+    // Create admin user if it doesn't exist
+    $user = \App\Models\User::firstOrCreate(
+        ['email' => 'admin@example.com'],   // ← replace email if you want
+        [
+            'name' => 'Admin',
+            'password' => bcrypt('password123'), // ← change this password
+        ]
+    );
+
+    // Ensure roles table exists
+    if (!\Spatie\Permission\Models\Role::where('name', 'admin')->exists()) {
+        \Spatie\Permission\Models\Role::create(['name' => 'admin']);
+    }
+
+    // Assign role
     $user->assignRole('admin');
 
-    return 'Admin role assigned!';
+    return 'Admin account created and role assigned!';
 });
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
