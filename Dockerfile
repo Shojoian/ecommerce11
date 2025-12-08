@@ -28,8 +28,7 @@ COPY . .
 # ───────────────────────────────
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-RUN mkdir -p /app/storage/framework/{sessions,views,cache} \
-    && chmod -R 775 /app/storage /app/bootstrap/cache
+
 
 
 # ───────────────────────────────
