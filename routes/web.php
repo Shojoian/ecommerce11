@@ -17,6 +17,13 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 | Storefront Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/fix-storage', function () {
+    Artisan::call('storage:link');
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    return 'Storage ready.';
+});
+
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
