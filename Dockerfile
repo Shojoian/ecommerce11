@@ -45,4 +45,5 @@ RUN chmod -R 777 storage bootstrap/cache
 # 6. Serve Laravel with PHP-FPM
 # Railway will run `php artisan serve` unless start command is set
 # ───────────────────────────────
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+
