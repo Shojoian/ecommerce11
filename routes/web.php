@@ -17,6 +17,22 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 | Storefront Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/run-setup', function () {
+
+    \Artisan::call('migrate', ['--force' => true]);
+
+    \Artisan::call('db:seed', [
+        '--class' => 'AdminSeeder',
+        '--force' => true
+    ]);
+
+    \Artisan::call('db:seed', [
+        '--class' => 'ProductSeeder',
+        '--force' => true
+    ]);
+
+    return "Migrations + Seeders completed.";
+});
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
